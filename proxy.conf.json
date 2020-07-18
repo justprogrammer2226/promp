@@ -1,0 +1,10 @@
+
+{
+    "/prom": {
+      "target": "https://my.prom.ua/api/v1",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true,
+      "pathRewrite": {"/prom" : ""}
+    }
+  }

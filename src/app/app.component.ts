@@ -1,4 +1,6 @@
+import { PromService } from './services/prom.service';
 import { Component } from '@angular/core';
+import { PromApiToken } from './models/prom/token.model';
 
 @Component({
   selector: 'app-root',
