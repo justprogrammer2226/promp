@@ -24,6 +24,7 @@ export class Product {
   main_image: string;
   images: Image[];
   status: string;
+  usedToken: string;
 
   static adapt(data): Product {
     const mappedModel = new Product();
@@ -41,13 +42,14 @@ export class Product {
     mappedModel.currency = data.currency;
     mappedModel.main_image = data.main_image;
     mappedModel.status = data.status;
+    mappedModel.usedToken = data.usedToken;
 
     if (data.discount) mappedModel.discount = Discount.adapt(data.discount);
     if (data.group) mappedModel.group = Group.adapt(data.group);
     if (data.category) mappedModel.category = Category.adapt(data.category);
 
-    if (data.prices) mappedModel.prices = data.prices.map(element => Price.adapt(element));
-    if (data.images) mappedModel.images = data.images.map(element => Image.adapt(element));
+    if (data.prices && data.prices.length > 0) mappedModel.prices = data.prices.map(element => Price.adapt(element));
+    if (data.images && data.prices.images > 0) mappedModel.images = data.images.map(element => Image.adapt(element));
 
     return mappedModel;
   }
