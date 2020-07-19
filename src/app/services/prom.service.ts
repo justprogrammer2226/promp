@@ -1,11 +1,11 @@
-import { PromApiToken } from './../models/prom/token.model';
-import { Observable, of, merge, forkJoin } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ProductList } from '../models/prom/product-list.model';
-import { Product } from '../models/prom/product.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ProductEdit } from '../models/prom/product-edit.model';
+import { Product } from '../models/prom/product.model';
+import { SearchProductsParams } from '../models/prom/search/search-products-params.model';
+import { PromApiToken } from './../models/prom/token.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +14,8 @@ export class PromService {
 
   constructor(private httpClient: HttpClient) { }
 
-  public getProducts(selectedPromTokens: PromApiToken[] = null): Observable<Product[]> {
-    const params = {
-    };
-    if (selectedPromTokens) {
-      params['tokens'] = selectedPromTokens.map(_ => _.token);
-    }
-    return this.httpClient.get<Product[]>('https://localhost:44372/prom/products/list', {params: params}).pipe(
+  public getProducts(params: SearchProductsParams): Observable<Product[]> {
+    return this.httpClient.get<Product[]>('https://localhost:44372/prom/products/list', {params: params as any}).pipe(
       map(products => {
         return products.map(product => Product.adapt(product))
       })
