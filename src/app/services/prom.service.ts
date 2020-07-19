@@ -12,12 +12,15 @@ import { ProductEdit } from '../models/prom/product-edit.model';
 })
 export class PromService {
 
-  private promApiUrl = '/prom';
-
   constructor(private httpClient: HttpClient) { }
 
-  public getProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>('https://localhost:44372/prom/products/list').pipe(
+  public getProducts(selectedPromTokens: PromApiToken[] = null): Observable<Product[]> {
+    const params = {
+    };
+    if (selectedPromTokens) {
+      params['tokens'] = selectedPromTokens.map(_ => _.token);
+    }
+    return this.httpClient.get<Product[]>('https://localhost:44372/prom/products/list', {params: params}).pipe(
       map(products => {
         return products.map(product => Product.adapt(product))
       })

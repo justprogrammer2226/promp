@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <th>
+
+    </th>
+    <th>
+      <input type="text" placeholder="Введите новый токен" [(ngModel)]="newToken">
+    </th>
+    <th>
+      <button (click)="addToken()">Добавить</button>
+    </th>
+  </tr>
+  <tr *ngFor="let promToken of promTokens"
+  [class.valid-token]="promToken.isValid"
+  [class.invalid-token]="!promToken.isValid">
+    <th>
+      <input type="checkbox" [checked]="isSelected(promToken)" (click)="toggleSelection(promToken)" [disabled]="!promToken.isValid">
+    </th>
+    <th>
+      {{promToken.token}}
+    </th>
+    <th>
+      <button (click)="removeToken(promToken)">Удалить</button>
+    </th>
+  </tr>
+</table>

@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "no-output-named-after-standard-event": true,
     "curly": false,
     "array-type": false,
     "arrow-parens": false,
