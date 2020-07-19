@@ -1,5 +1,16 @@
 <app-token (selectedPromTokensChange)="onSelectedPromTokensChange($event)"></app-token>
 
+<input type="text" placeholder="Введите текст" [(ngModel)]="params.searchText">
+
+<select [(ngModel)]="params.searchBy">
+  <option [value]="SearchProductsBy.Name">Имя</option>
+  <option [value]="SearchProductsBy.Description">Описание</option>
+  <option [value]="SearchProductsBy.Sku">Артикул</option>
+  <option [value]="SearchProductsBy.Keywords">Ключевые слова</option>
+</select>
+
+<button (click)="search()">Поиск</button>
+
 <table>
   <tr>
     <th>

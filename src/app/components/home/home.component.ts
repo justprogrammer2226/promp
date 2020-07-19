@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { PromService } from 'src/app/services/prom.service';
 import { PromApiToken } from './../../models/prom/token.model';
 import { ProductEdit } from 'src/app/models/prom/product-edit.model';
+import { SearchProductsParams, SearchProductsBy } from 'src/app/models/prom/search/search-products-params.model';
 
 @Component({
   templateUrl: './home.component.html',
@@ -10,6 +11,12 @@ import { ProductEdit } from 'src/app/models/prom/product-edit.model';
 })
 export class HomeComponent {
   public products: Product[] = [];
+  public params: SearchProductsParams = {
+    searchText: '',
+    searchBy: SearchProductsBy.Name,
+    selectedPromTokens: [],
+  }
+  public SearchProductsBy = SearchProductsBy;
 
   constructor (private promService: PromService) {}
 
@@ -22,8 +29,8 @@ export class HomeComponent {
     // });
   }
 
-  private loadProducts(selectedPromTokens: PromApiToken[] = null): void {
-    this.promService.getProducts(selectedPromTokens).subscribe(_ => {
+  private loadProducts(): void {
+    this.promService.getProducts(this.params).subscribe(_ => {
       this.products = _;
 
       console.log(_);
@@ -31,6 +38,11 @@ export class HomeComponent {
   }
 
   public onSelectedPromTokensChange(selectedPromTokens: PromApiToken[]): void {
-    this.loadProducts(selectedPromTokens);
+    this.params.selectedPromTokens = selectedPromTokens.map(_ => _.token);
+    this.loadProducts();
+  }
+
+  public search(): void {
+    this.loadProducts();
   }
 }
