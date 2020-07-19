@@ -9,6 +9,11 @@
   <option [value]="SearchProductsBy.Keywords">Ключевые слова</option>
 </select>
 
+<select [(ngModel)]="params.availabilityBy">
+  <option [value]="ProductAvailabilityBy.Name">Имя</option>
+  <option [value]="ProductAvailabilityBy.Sku">Артикул</option>
+</select>
+
 <button (click)="search()">Поиск</button>
 
 <table>
@@ -19,6 +24,9 @@
     <th>
       Название
     </th>
+    <th>
+      Наличие
+    </th>
   </tr>
   <tr *ngFor="let product of products">
     <td>
@@ -26,6 +34,9 @@
     </td>
     <td>
       {{ product.name }}
+    </td>
+    <td>
+      {{ product.availableInShops }}
     </td>
   </tr>
 </table>
