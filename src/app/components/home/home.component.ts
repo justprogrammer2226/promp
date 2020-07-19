@@ -1,3 +1,4 @@
+import { ProductAvailabilityBy } from './../../models/prom/search/search-products-params.model';
 import { Product } from './../../models/prom/product.model';
 import { Component } from '@angular/core';
 import { PromService } from 'src/app/services/prom.service';
@@ -14,9 +15,11 @@ export class HomeComponent {
   public params: SearchProductsParams = {
     searchText: '',
     searchBy: SearchProductsBy.Name,
+    availabilityBy: ProductAvailabilityBy.Name,
     selectedPromTokens: [],
   }
   public SearchProductsBy = SearchProductsBy;
+  public ProductAvailabilityBy = ProductAvailabilityBy;
 
   constructor (private promService: PromService) {}
 

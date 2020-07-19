@@ -25,6 +25,7 @@ export class Product {
   images: Image[];
   status: string;
   usedToken: string;
+  availableInShops: number;
 
   static adapt(data): Product {
     const mappedModel = new Product();
@@ -43,6 +44,7 @@ export class Product {
     mappedModel.main_image = data.main_image;
     mappedModel.status = data.status;
     mappedModel.usedToken = data.usedToken;
+    mappedModel.availableInShops = data.availableInShops;
 
     if (data.discount) mappedModel.discount = Discount.adapt(data.discount);
     if (data.group) mappedModel.group = Group.adapt(data.group);
