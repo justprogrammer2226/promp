@@ -4,7 +4,7 @@ import { Price } from './price.model';
 export class ProductEdit {
   id: number;
   presence: string;
-  presence_sure: boolean;
+  presenceSure: boolean;
   price: number;
   status: string;
   prices: Price[];
@@ -21,7 +21,7 @@ export class ProductEdit {
     mappedModel.keywords = data.keywords;
     mappedModel.description = data.description;
     mappedModel.presence = data.presence;
-    mappedModel.presence_sure = data.presence_sure;
+    mappedModel.presenceSure = data.presenceSure;
     mappedModel.price = data.price;
     mappedModel.status = data.status;
     mappedModel.usedToken = data.usedToken;
