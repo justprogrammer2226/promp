@@ -12,14 +12,16 @@ import { Product } from 'src/app/models/prom/product.model';
 export class TokenComponent {
 
   public promTokens: PromApiToken[] = [];
-  private selectedPromTokens: PromApiToken[] = [];
+  private selectedPromTokens: string[] = [];
   public newToken: string;
 
-  @Output() public selectedPromTokensChange: EventEmitter<PromApiToken[]> = new EventEmitter();
+  @Output() public selectedPromTokensChange: EventEmitter<string[]> = new EventEmitter();
 
   constructor (private promService: PromService) {}
 
   public ngOnInit(): void {
+    this.selectedPromTokens = this.promService.getSelectedTokens();
+    this.selectedPromTokensChange.emit(this.selectedPromTokens);
     this.loadTokens();
   }
 
@@ -49,17 +51,19 @@ export class TokenComponent {
   }
 
   public toggleSelection(promToken: PromApiToken): void {
-    const token = this.selectedPromTokens.find(_ => _.token === promToken.token);
+    const token = this.selectedPromTokens.find(_ => _ === promToken.token);
     if (token) {
+      this.promService.unselectToken(promToken.token);
       this.selectedPromTokens.splice(this.selectedPromTokens.indexOf(token), 1);
     } else {
-      this.selectedPromTokens.push(this.promTokens.find(_ => _.token === promToken.token));
+      this.promService.selectToken(promToken.token);
+      this.selectedPromTokens.push(this.promTokens.find(_ => _.token === promToken.token).token);
     }
     this.selectedPromTokensChange.emit(this.selectedPromTokens);
   }
 
   public isSelected(promToken: PromApiToken): boolean {
-    const token = this.selectedPromTokens.find(_ => _.token === promToken.token);
+    const token = this.selectedPromTokens.find(_ => _ === promToken.token);
     return token != null;
   }
 
