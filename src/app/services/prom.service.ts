@@ -23,7 +23,6 @@ export class PromService {
   }
 
   public editProducts(products: ProductEdit[]): Observable<any> {
-    console.log(JSON.stringify(products));
     return this.httpClient.post('https://localhost:44372/prom/products/edit', products);
   }
 
@@ -37,5 +36,22 @@ export class PromService {
 
   public removeToken(token: PromApiToken): Observable<any> {
     return this.httpClient.delete('https://localhost:44372/prom/tokens/' + token.token);
+  }
+
+  public getSelectedTokens(): string[] {
+    const tokens = JSON.parse(localStorage.getItem('prom-tokens')) as string[] || [];
+    return tokens;
+  }
+
+  public selectToken(token: string): void {
+    const tokens = JSON.parse(localStorage.getItem('prom-tokens')) as string[] || [];
+    tokens.push(token);
+    localStorage.setItem('prom-tokens', JSON.stringify(tokens));
+  }
+
+  public unselectToken(token: string): void {
+    let tokens = JSON.parse(localStorage.getItem('prom-tokens')) as string[] || [];
+    tokens = tokens.filter(_ => _ != token);
+    localStorage.setItem('prom-tokens', JSON.stringify(tokens));
   }
 }

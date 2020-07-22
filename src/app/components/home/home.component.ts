@@ -40,8 +40,8 @@ export class HomeComponent {
     });
   }
 
-  public onSelectedPromTokensChange(selectedPromTokens: PromApiToken[]): void {
-    this.params.selectedPromTokens = selectedPromTokens.map(_ => _.token);
+  public onSelectedPromTokensChange(selectedPromTokens: string[]): void {
+    this.params.selectedPromTokens = selectedPromTokens;
     this.loadProducts();
   }
 
