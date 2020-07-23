@@ -24,7 +24,7 @@ export class HomeComponent {
   constructor (private promService: PromService) {}
 
   public ngOnInit(): void {
-    this.loadProducts();
+    // this.loadProducts();
     // this.promService.getProducts().subscribe(_ => {
     //   console.log(_);
     //   _[0].name = "FINAL CHANGE NAME";
