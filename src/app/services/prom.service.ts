@@ -1,18 +1,19 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductEdit } from '../models/prom/product-edit.model';
 import { Product } from '../models/prom/product.model';
 import { SearchProductsParams } from '../models/prom/search/search-products-params.model';
 import { PromApiToken } from './../models/prom/token.model';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PromService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   public getProducts(params: SearchProductsParams): Observable<Product[]> {
     return this.httpClient.get<Product[]>('https://localhost:44372/prom/products/list', {params: params as any}).pipe(
@@ -39,8 +40,11 @@ export class PromService {
   }
 
   public getSelectedTokens(): string[] {
-    const tokens = JSON.parse(localStorage.getItem('prom-tokens')) as string[] || [];
-    return tokens;
+    if (isPlatformBrowser(this.platformId)) {
+      const tokens = JSON.parse(localStorage.getItem('prom-tokens')) as string[] || [];
+      return tokens;
+    }
+    return [];
   }
 
   public selectToken(token: string): void {

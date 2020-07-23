@@ -20,9 +20,9 @@ export class TokenComponent {
   constructor (private promService: PromService) {}
 
   public ngOnInit(): void {
+    this.loadTokens();
     this.selectedPromTokens = this.promService.getSelectedTokens();
     this.selectedPromTokensChange.emit(this.selectedPromTokens);
-    this.loadTokens();
   }
 
   private loadTokens(): void {
