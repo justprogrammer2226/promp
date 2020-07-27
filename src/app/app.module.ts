@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenComponent } from './components/common/token/token.component';
 import { CookieService } from 'ngx-cookie-service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NbThemeModule, NbLayoutModule, NbButtonModule, NbCardModule, NbInputModule, NbSelectModule, NbOptionModule, NbCheckboxModule, NbTreeGridModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,17 @@ import { CookieService } from 'ngx-cookie-service';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    BrowserAnimationsModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule,
+    NbEvaIconsModule,
+    NbButtonModule,
+    NbCardModule,
+    NbInputModule,
+    NbSelectModule,
+    NbOptionModule,
+    NbCheckboxModule,
+    NbTreeGridModule,
   ],
   providers: [
     {

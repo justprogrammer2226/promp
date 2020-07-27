@@ -1,42 +1,44 @@
 <app-token (selectedPromTokensChange)="onSelectedPromTokensChange($event)"></app-token>
 
-<input type="text" placeholder="Введите текст" [(ngModel)]="params.searchText">
+<input nbInput type="text" placeholder="Введите текст" [(ngModel)]="params.searchText">
 
-<select [(ngModel)]="params.searchBy">
-  <option [value]="SearchProductsBy.Name">Имя</option>
-  <option [value]="SearchProductsBy.Description">Описание</option>
-  <option [value]="SearchProductsBy.Sku">Артикул</option>
-  <option [value]="SearchProductsBy.Keywords">Ключевые слова</option>
-</select>
+<nb-select [(ngModel)]="params.searchBy">
+  <nb-option [value]="SearchProductsBy.Name">Имя</nb-option>
+  <nb-option [value]="SearchProductsBy.Description">Описание</nb-option>
+  <nb-option [value]="SearchProductsBy.Sku">Артикул</nb-option>
+  <nb-option [value]="SearchProductsBy.Keywords">Ключевые слова</nb-option>
+</nb-select>
 
-<select [(ngModel)]="params.availabilityBy">
-  <option [value]="ProductAvailabilityBy.Name">Имя</option>
-  <option [value]="ProductAvailabilityBy.Sku">Артикул</option>
-</select>
+<nb-select [(ngModel)]="params.availabilityBy">
+  <nb-option [value]="ProductAvailabilityBy.Name">Имя</nb-option>
+  <nb-option [value]="ProductAvailabilityBy.Sku">Артикул</nb-option>
+</nb-select>
 
-<button (click)="search()">Поиск</button>
+<button nbButton status="primary" (click)="search()">Поиск</button>
 
-<table>
-  <tr>
-    <!-- <th>
-      
-    </th> -->
-    <th>
-      Название
-    </th>
-    <th>
-      Наличие
-    </th>
-  </tr>
-  <tr *ngFor="let product of products">
-    <!-- <td>
-      <img [src]="product.mainImage" alt="">
-    </td> -->
-    <td>
-      {{ product.name }}
-    </td>
-    <td>
-      {{ product.availableInShops }}
-    </td>
-  </tr>
-</table>
+<nb-card>
+  <nb-card-body>
+
+    <table [nbTreeGrid]="data" equalColumnsWidth>
+
+      <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+      <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+
+      <ng-container nbTreeGridColumnDef="name">
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Название</th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">
+          {{row.data.name}}
+        </td>
+      </ng-container>
+
+      <ng-container nbTreeGridColumnDef="availableInShops">
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Наличие</th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">
+          {{row.data.availableInShops}}
+        </td>
+      </ng-container>
+
+    </table>
+
+  </nb-card-body>
+</nb-card>

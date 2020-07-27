@@ -51,15 +51,17 @@ export class TokenComponent {
   }
 
   public toggleSelection(promToken: PromApiToken): void {
-    const token = this.selectedPromTokens.find(_ => _ === promToken.token);
-    if (token) {
-      this.promService.unselectToken(promToken.token);
-      this.selectedPromTokens.splice(this.selectedPromTokens.indexOf(token), 1);
-    } else {
-      this.promService.selectToken(promToken.token);
-      this.selectedPromTokens.push(this.promTokens.find(_ => _.token === promToken.token).token);
+    if (promToken.isValid) {
+      const token = this.selectedPromTokens.find(_ => _ === promToken.token);
+      if (token) {
+        this.promService.unselectToken(promToken.token);
+        this.selectedPromTokens.splice(this.selectedPromTokens.indexOf(token), 1);
+      } else {
+        this.promService.selectToken(promToken.token);
+        this.selectedPromTokens.push(this.promTokens.find(_ => _.token === promToken.token).token);
+      }
+      this.selectedPromTokensChange.emit(this.selectedPromTokens);
     }
-    this.selectedPromTokensChange.emit(this.selectedPromTokens);
   }
 
   public isSelected(promToken: PromApiToken): boolean {
