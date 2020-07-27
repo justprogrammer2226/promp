@@ -21,7 +21,9 @@ export class HomeComponent {
   public SearchProductsBy = SearchProductsBy;
   public ProductAvailabilityBy = ProductAvailabilityBy;
 
-  constructor (private promService: PromService) {}
+  constructor (private promService: PromService) {
+
+  }
 
   public ngOnInit(): void {
     // this.loadProducts();
@@ -35,8 +37,8 @@ export class HomeComponent {
   private loadProducts(): void {
     this.promService.getProducts(this.params).subscribe(_ => {
       this.products = _;
-
-      console.log(_);
+      console.log('Products', _);
+      this.data = TreeNodeProduct.fromArray(this.products);
     });
   }
 
@@ -47,5 +49,21 @@ export class HomeComponent {
 
   public search(): void {
     this.loadProducts();
+  }
+
+  allColumns = [ 'name', 'availableInShops' ];
+
+  data: TreeNodeProduct[] = [];
+}
+
+export class TreeNodeProduct {
+  public data: Product;
+
+  constructor(data: Product) {
+    this.data = data;
+  }
+
+  public static fromArray(array: Product[]): TreeNodeProduct[] {
+    return array.map(_ => new TreeNodeProduct(_));
   }
 }
