@@ -1,8 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { PromService } from 'src/app/services/prom.service';
-import { ProductEdit } from 'src/app/models/prom/product-edit.model';
-import { PromApiToken } from 'src/app/models/prom/token.model';
-import { Product } from 'src/app/models/prom/product.model';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { PromApiToken } from 'src/app/core/models/prom/token.model';
+import { PromService } from 'src/app/core/services/prom.service';
 
 @Component({
   selector: 'app-token',
