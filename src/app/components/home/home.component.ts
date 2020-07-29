@@ -1,10 +1,7 @@
-import { ProductAvailabilityBy } from './../../models/prom/search/search-products-params.model';
-import { Product } from './../../models/prom/product.model';
 import { Component } from '@angular/core';
-import { PromService } from 'src/app/services/prom.service';
-import { PromApiToken } from './../../models/prom/token.model';
-import { ProductEdit } from 'src/app/models/prom/product-edit.model';
-import { SearchProductsParams, SearchProductsBy } from 'src/app/models/prom/search/search-products-params.model';
+import { Product } from 'src/app/core/models/prom/product.model';
+import { ProductAvailabilityBy, SearchProductsBy, SearchProductsParams } from 'src/app/core/models/prom/search/search-products-params.model';
+import { PromService } from 'src/app/core/services/prom.service';
 
 @Component({
   templateUrl: './home.component.html',

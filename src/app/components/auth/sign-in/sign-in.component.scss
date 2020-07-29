@@ -1,0 +1,24 @@
+#sign-in-page {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#sign-in-form {
+  width: 50%;
+  max-width: 400px;
+
+  & input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  & input + input {
+    margin-top: 20px;
+  }
+
+  button {
+    width: 100%;
+  }
+}

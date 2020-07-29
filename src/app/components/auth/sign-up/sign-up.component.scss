@@ -1,0 +1,24 @@
+#sign-up-page {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#sign-up-form {
+  width: 50%;
+  max-width: 400px;
+
+  & input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  & input + input {
+    margin-top: 30px;
+  }
+
+  button {
+    width: 100%;
+  }
+}

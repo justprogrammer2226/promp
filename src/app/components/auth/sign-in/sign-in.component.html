@@ -1,0 +1,19 @@
+<form id="sign-in-page" #form="ngForm" (ngSubmit)="form.form.valid && submit()">
+  <nb-card accent="info" id="sign-in-form">
+    <nb-card-header>Авторизация</nb-card-header>
+    <nb-card-body>
+        <input nbInput name="email" type="text" placeholder="Почта" #email="ngModel"
+          [(ngModel)]="signIn.email" required email autocomplete="on"
+          [status]="form.submitted && email.invalid ? 'danger' : 'basic'">
+        <input nbInput name="password" type="password" placeholder="Пароль" #password="ngModel"
+          [(ngModel)]="signIn.password" required minlength="8" autocomplete="on"
+          [status]="form.submitted && password.invalid ? 'danger' : 'basic'">
+    </nb-card-body>
+    <nb-card-footer>
+      <button nbButton status="primary">Войти</button>
+    </nb-card-footer>
+  </nb-card>
+</form>
+
+
+
