@@ -1,3 +1,4 @@
+import { ValidationService } from './../../../core/services/validation.service';
 import { AuthService } from './../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +19,7 @@ export class SignUpComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private formBuilder: FormBuilder,
+    private validationService: ValidationService,
   ) {
     this.form = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
@@ -37,10 +39,7 @@ export class SignUpComponent implements OnInit {
       const signUp = SignUpModel.adapt(this.form.value);
       this.authService.signUp(signUp).subscribe();
     } else {
-      Object.keys(this.form.controls).forEach(field => {
-        const control = this.form.get(field);
-        control.markAsTouched({ onlySelf: true });
-      });
+      this.validationService.validateAllFormFields(this.form);
     }
   }
 }
