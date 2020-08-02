@@ -1,18 +1,19 @@
-import { ValidationService } from './../../../core/services/validation.service';
-import { AuthService } from './../../../core/services/auth.service';
+import { ValidationService } from '../../../core/services/validation.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SignInModel } from './../../../core/models/auth/sign-in.model';
+import { SignInModel } from '../../../core/models/auth/sign-in.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  templateUrl: './recovery-password.component.html',
+  styleUrls: ['./recovery-password.component.scss']
 })
-export class SignInComponent implements OnInit {
+export class RecoveryPasswordComponent implements OnInit {
 
   private returnUrl: string;
   public form: FormGroup;
+  public sentEmail = false;
 
   constructor(
     private router: Router,
@@ -23,7 +24,6 @@ export class SignInComponent implements OnInit {
   ) { 
     this.form = this.formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [ Validators.required]],
     });
   }
 
@@ -33,10 +33,8 @@ export class SignInComponent implements OnInit {
 
   public submit(): void {
     if (this.form.valid) {
-      const signIn = SignInModel.adapt(this.form.value);
-      this.authService.signIn(signIn).subscribe(_ => {
-        localStorage.setItem('token', _.token);
-        this.router.navigateByUrl('/');
+      this.authService.sendRecoveryPasswordEmail(this.form.value.email).subscribe(_ => {
+        this.sentEmail = true;
       });
     } else {
       this.validationService.validateAllFormFields(this.form);

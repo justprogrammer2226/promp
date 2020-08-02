@@ -7,6 +7,7 @@ import { Product } from '../models/prom/product.model';
 import { SearchProductsParams } from '../models/prom/search/search-products-params.model';
 import { PromApiToken } from './../models/prom/token.model';
 import { isPlatformBrowser } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class PromService {
   constructor(private httpClient: HttpClient, @Inject(PLATFORM_ID) private platformId: Object) { }
 
   public getProducts(params: SearchProductsParams): Observable<Product[]> {
-    return this.httpClient.get<Product[]>('https://localhost:44372/prom/products/list', {params: params as any}).pipe(
+    return this.httpClient.get<Product[]>(environment.apiUrl + '/prom/products/list', {params: params as any}).pipe(
       map(products => {
         return products.map(product => Product.adapt(product))
       })
@@ -24,19 +25,19 @@ export class PromService {
   }
 
   public editProducts(products: ProductEdit[]): Observable<any> {
-    return this.httpClient.post('https://localhost:44372/prom/products/edit', products);
+    return this.httpClient.post(environment.apiUrl + '/prom/products/edit', products);
   }
 
   public getAllTokens(): Observable<PromApiToken[]> {
-    return this.httpClient.get<PromApiToken[]>('https://localhost:44372/prom/tokens');
+    return this.httpClient.get<PromApiToken[]>(environment.apiUrl + '/prom/tokens');
   }
 
   public addToken(token: PromApiToken): Observable<PromApiToken> {
-    return this.httpClient.post<PromApiToken>('https://localhost:44372/prom/tokens', token);
+    return this.httpClient.post<PromApiToken>(environment.apiUrl + '/prom/tokens', token);
   }
 
   public removeToken(token: PromApiToken): Observable<any> {
-    return this.httpClient.delete('https://localhost:44372/prom/tokens/' + token.token);
+    return this.httpClient.delete(environment.apiUrl + '/prom/tokens/' + token.token);
   }
 
   public getSelectedTokens(): string[] {
