@@ -1,13 +1,11 @@
-<form id="sign-in-page" #form="ngForm" (ngSubmit)="form.form.valid && submit()">
+<form id="sign-in-page" [formGroup]="form" (ngSubmit)="submit()" novalidate>
   <nb-card accent="info" id="sign-in-form">
     <nb-card-header>Авторизация</nb-card-header>
     <nb-card-body>
-        <input nbInput name="email" type="text" placeholder="Почта" #email="ngModel"
-          [(ngModel)]="signIn.email" required email autocomplete="on"
-          [status]="form.submitted && email.invalid ? 'danger' : 'basic'">
-        <input nbInput name="password" type="password" placeholder="Пароль" #password="ngModel"
-          [(ngModel)]="signIn.password" required minlength="8" autocomplete="on"
-          [status]="form.submitted && password.invalid ? 'danger' : 'basic'">
+        <input nbInput type="text" placeholder="Почта" formControlName="email" autocomplete="on"
+          [status]="form.controls['email'].invalid && form.controls['email'].touched ? 'danger' : 'basic'">
+        <input nbInput type="password" placeholder="Пароль" formControlName="password" autocomplete="on"
+          [status]="form.controls['password'].invalid && form.controls['password'].touched ? 'danger' : 'basic'">
     </nb-card-body>
     <nb-card-footer>
       <button nbButton status="primary">Войти</button>

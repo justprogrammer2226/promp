@@ -1,6 +1,6 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
@@ -24,6 +24,7 @@ import { TokenInterceptor } from './token.interceptor';
     BrowserAnimationsModule,
     NebularModule,
     SharedModule,
+    ReactiveFormsModule,
   ],
   providers: [
     {

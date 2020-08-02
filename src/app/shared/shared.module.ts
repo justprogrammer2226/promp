@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
-import { TokenComponent } from './token/token.component';
-import { NebularModule } from '../nebular.module';
 import { FormsModule } from '@angular/forms';
-import { MustMatchDirective } from './directives/must-match.directive';
+import { BrowserModule } from '@angular/platform-browser';
+import { NebularModule } from './../nebular.module';
+import { TokenComponent } from './token/token.component';
+import { CommonModule } from '@angular/common';
   
 @NgModule({
   declarations: [
     TokenComponent,
-    MustMatchDirective,
   ],
   imports: [
     FormsModule,
     NebularModule,
+    CommonModule,
   ],
   exports: [
     TokenComponent,
-    MustMatchDirective,
+    CommonModule,
   ],
 })
 export class SharedModule { }
