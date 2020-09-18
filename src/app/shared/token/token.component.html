@@ -4,7 +4,10 @@
 
     </th>
     <th>
-      <input nbInput type="text" placeholder="Введите новый токен" [(ngModel)]="newToken">
+      <input nbInput type="text" placeholder="Введите новый токен" [(ngModel)]="newToken.token">
+    </th>
+    <th>
+      <input nbInput type="text" placeholder="Введите имя магазина" [(ngModel)]="newToken.shopName">
     </th>
     <th>
       <button nbButton status="primary" (click)="addToken()">Добавить</button>
@@ -18,6 +21,9 @@
     </th>
     <th>
       {{promToken.token}}
+    </th>
+    <th>
+      {{promToken.shopName}}
     </th>
     <th>
       <button nbButton status="primary" (click)="removeToken(promToken)">Удалить</button>
