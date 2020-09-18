@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "typedef": [true, "call-signature", "parameter", "variable-declaration"],
     "no-output-named-after-standard-event": true,
     "curly": false,
     "array-type": false,
