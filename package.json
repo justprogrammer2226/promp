@@ -30,7 +30,7 @@
     "@nguniversal/express-engine": "^9.1.1",
     "domino": "^2.1.6",
     "eva-icons": "^1.1.2",
-    "express": "^4.15.2",
+    "express": "^4.18.2",
     "fs": "0.0.1-security",
     "jwt-decode": "^2.2.0",
     "ngx-cookie-service": "^3.0.4",
